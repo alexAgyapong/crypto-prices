@@ -9,5 +9,6 @@ import { Message } from '@crypto-prices/api-interfaces';
 })
 export class AppComponent {
   hello$ = this.http.get<Message>('/api/hello');
-  constructor(private http: HttpClient) {}
+  prices$ = this.http.get<any>('/api/prices');
+  constructor(private http: HttpClient) { }
 }
