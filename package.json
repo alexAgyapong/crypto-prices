@@ -25,7 +25,10 @@
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "start:fe": "ng serve client",
+    "start:be": "ng serve api",
+    "dev": "concurrently -p=\"{name}\" -n=\"Angular,NestJS\" -c=\"green,blue\" \"npm run start:fe\" \"npm run start:be\""
   },
   "private": true,
   "dependencies": {
@@ -72,6 +75,7 @@
     "@types/node": "14.14.33",
     "@typescript-eslint/eslint-plugin": "4.19.0",
     "@typescript-eslint/parser": "4.19.0",
+    "concurrently": "^6.0.2",
     "cypress": "^6.0.1",
     "dotenv": "8.2.0",
     "eslint": "7.22.0",
