@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    // let currencies = [];
     this.getCrytoPrices();
 
     // setInterval(() => this.getCrytoPrices(), this.Time_Out)
