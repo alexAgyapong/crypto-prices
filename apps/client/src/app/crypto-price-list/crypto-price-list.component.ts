@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Price } from '@crypto-prices/api-interfaces';
 
 @Component({
   selector: 'crypto-prices-crypto-price-list',
@@ -6,6 +7,6 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
   styleUrls: ['./crypto-price-list.component.scss']
 })
 export class CryptoPriceListComponent {
-  @Input() prices: unknown;
+  @Input() prices: Price[];
 
 }
