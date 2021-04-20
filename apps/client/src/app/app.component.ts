@@ -20,7 +20,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getCrytoPrices();
-
     // setInterval(() => this.getCrytoPrices(), this.Time_Out)
 
   }
