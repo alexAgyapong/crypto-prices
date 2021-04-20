@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Message } from '@crypto-prices/api-interfaces';
 import { tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'crypto-prices-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   hello$ = this.http.get<Message>('/api/hello');
   prices$ = this.http.get<unknown>('/api/prices');
   prices = [];
   Time_Out = 10 * 1000;
+  subscription: Subscription;
 
   constructor(private http: HttpClient) { }
 
@@ -23,9 +25,9 @@ export class AppComponent implements OnInit {
 
   }
 
-  private getCrytoPrices() {
+  getCrytoPrices() {
     this.prices = [];
-    this.prices$.pipe(tap(res => {
+    this.subscription = this.prices$.pipe(tap(res => {
       const data = Object.entries(res);
       data.forEach(([key, value]) => {
         const item = { key, value: this.getCurrencies(value) };
@@ -44,5 +46,9 @@ export class AppComponent implements OnInit {
       result.push(item);
     })
     return result;
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
   }
 }
