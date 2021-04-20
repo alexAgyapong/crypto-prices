@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Message, Price } from '@crypto-prices/api-interfaces';
-import { catchError, tap } from 'rxjs/operators';
-import { of, Subscription } from 'rxjs';
+import { Price } from '@crypto-prices/api-interfaces';
+import { Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'crypto-prices-root',
@@ -11,31 +10,29 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  prices$ = this.http.get<unknown>('/api/prices');
+
   prices = [];
-  Time_Out = 10 * 1000;
+  Time_Out = 60 * 1000;
   subscription: Subscription;
 
-  constructor(private http: HttpClient, private messageService: MessageService) { }
+  constructor(private dataService: DataService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.getCrytoPrices();
-    // setInterval(() => this.getCrytoPrices(), this.Time_Out)
-
+    setInterval(() => this.getCrytoPrices(), this.Time_Out)
+    /*SetInterval is used to retrieve updated prices every 30 seconds.
+      For production ready app, I would use sockets to which will emit updates*/
   }
 
   getCrytoPrices() {
     this.prices = [];
-    this.subscription = this.prices$
+    this.subscription = this.dataService.prices$
       .subscribe((res: Price[]) => {
         const data = Object.entries(res);
         data.forEach(([coin, currencies]) => {
           const item = { coin, currencies: this.getCurrencies(currencies) };
           this.prices.push(item);
-          console.log('second', JSON.stringify(this.prices));
         });
-        console.log(this.prices, 'prices ', { res });
-        console.log(JSON.stringify(this.prices), 'prices');
       },
         (err) => this.getErrorMessage(err)
       );
