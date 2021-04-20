@@ -1,1 +1,2 @@
-<crypto-prices-crypto-price-list [prices]="prices"></crypto-prices-crypto-price-list>
+<crypto-prices-crypto-price-list [prices]="prices" *ngIf="prices?.length"></crypto-prices-crypto-price-list>
+<p-messages></p-messages>
