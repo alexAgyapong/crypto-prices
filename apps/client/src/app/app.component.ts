@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getCrytoPrices();
-    setInterval(() => this.getCrytoPrices(), this.Time_Out)
+  //  setInterval(() => this.getCrytoPrices(), this.Time_Out);
     /*SetInterval is used to retrieve updated prices every 30 seconds.
       For production ready app, I would use sockets to which will emit updates*/
   }
