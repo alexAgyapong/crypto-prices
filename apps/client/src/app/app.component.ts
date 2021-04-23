@@ -12,14 +12,14 @@ import { DataService } from './data.service';
 export class AppComponent implements OnInit, OnDestroy {
 
   prices = [];
-  Time_Out = 60 * 1000;
+  Time_Out = 30 * 1000;
   subscription: Subscription;
 
   constructor(private dataService: DataService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.getCrytoPrices();
-  //  setInterval(() => this.getCrytoPrices(), this.Time_Out);
+   setInterval(() => this.getCrytoPrices(), this.Time_Out);
     /*SetInterval is used to retrieve updated prices every 30 seconds.
       For production ready app, I would use sockets to which will emit updates*/
   }
