@@ -1,12 +1,14 @@
 {
+  "baseUrl":"http://localhost:4200/",
   "fileServerFolder": ".",
   "fixturesFolder": "./src/fixtures",
   "integrationFolder": "./src/integration",
   "modifyObstructiveCode": false,
   "pluginsFile": "./src/plugins/index",
   "supportFile": "./src/support/index.ts",
-  "video": true,
+  "video": false,
   "videosFolder": "../../dist/cypress/apps/client-e2e/videos",
   "screenshotsFolder": "../../dist/cypress/apps/client-e2e/screenshots",
-  "chromeWebSecurity": false
+  "chromeWebSecurity": false,
+  "defaultCommandTimeout":10000
 }

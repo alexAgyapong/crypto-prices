@@ -26,3 +26,6 @@ describe('CryptoPriceListComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+
+// End to end test written for this component since it doesn't do 
